@@ -1,0 +1,380 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Colors — exact from Figma */
+  --clr-bg:        #ffffff;
+  --clr-hero-bg:   #faf9f5;
+  --clr-text:      #000000;
+  --clr-text-nav:  rgba(0, 0, 0, 0.8);
+  --clr-border:    #e8e8e4;
+
+  /* Typography — IBM Plex family */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+}
+
+/* ============================================================
+   SITE HEADER — sticky wrapper (navbar + mobile-menu together)
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--clr-bg);
+}
+
+/* ============================================================
+   NAVBAR
+   Figma: px-[56px] py-[32px], gap-[16px] brand, gap-[16px] links
+   ============================================================ */
+.navbar {
+  padding: 32px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand — logo + identity */
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;           /* Figma: gap-[16px] */
+}
+
+/* Avatar: 40×40 circular — Figma: size-[40px] */
+.navbar__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #d8d8d4;
+  flex-shrink: 0;
+}
+
+/* Identity block — Figma: flex-col leading-[normal] w-[152px] */
+.navbar__identity {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 152px;
+}
+
+/* Figma: IBM Plex Sans Medium 16px */
+.navbar__name {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--clr-text);
+  line-height: normal;
+}
+
+/* Figma: IBM Plex Sans Regular 14px */
+.navbar__title {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--clr-text);
+  line-height: normal;
+}
+
+/* Nav links — Figma: gap-[16px], Regular 14px, rgba(0,0,0,0.8) */
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar__link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--clr-text-nav);
+  line-height: normal;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.navbar__link:hover {
+  opacity: 0.5;
+}
+
+/* Burger — hidden on desktop/tablet */
+.navbar__burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.navbar__burger img {
+  width: 20px;
+  height: auto;
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.25s ease;
+}
+
+.mobile-menu.is-open {
+  max-height: 180px;
+}
+
+.mobile-menu__link {
+  display: block;
+  padding: 16px 24px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--clr-text-nav);
+  transition: opacity 0.2s ease;
+}
+
+.mobile-menu__link:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu__link:hover {
+  opacity: 0.5;
+}
+
+/* ============================================================
+   MAIN
+   ============================================================ */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   HERO
+   Figma: bg-[#faf9f5], flex-[1_0_0], flex-col, items-start,
+          justify-end, p-[56px], min-h-px
+   ============================================================ */
+.hero {
+  flex: 1 0 0;
+  background-color: var(--clr-hero-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 56px;
+  min-height: 1px;
+}
+
+/* Outer content block — Figma: flex-col gap-[24px] max-w-[516px] w-full */
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;           /* gap between text group and button */
+  align-items: flex-start;
+  max-width: 516px;
+  width: 100%;
+}
+
+/* Inner text group (label + heading) — Figma: flex-col gap-[8px] */
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Label — Figma: IBM Plex Mono Medium 14px leading-[normal] */
+.hero__label {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--clr-text);
+  line-height: normal;
+}
+
+/* Heading wrapper — Figma: IBM Plex Sans Medium 32px leading-[0] */
+.hero__heading-wrap {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--clr-text);
+  line-height: 0;      /* Figma: leading-[0] on wrapper */
+}
+
+/* Each heading line — Figma: leading-[32px] */
+.hero__heading-line {
+  line-height: 32px;
+}
+
+/* Button — Figma: bg-black px-[16px] py-[12px] Medium 14px white */
+.hero__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  background-color: var(--clr-text);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.hero__btn:hover {
+  opacity: 0.75;
+}
+
+/* ============================================================
+   FOOTER
+   Figma: flex flex-wrap gap-[24px_80px] px-[56px] py-[32px]
+          font Regular 14px — columns w-[230px], no inner gap
+   ============================================================ */
+.footer {
+  background-color: var(--clr-bg);
+  padding: 32px 56px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 80px;      /* row-gap col-gap — exact from Figma */
+  flex-shrink: 0;
+}
+
+/* Columns — Figma: flex-col items-start w-[230px], no gap */
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 230px;
+}
+
+/* Figma: IBM Plex Sans Regular 14px leading-[normal] */
+.footer__name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--clr-text);
+  line-height: normal;
+}
+
+/* Tagline wrapper — Figma: leading-[0] on wrapper, leading-[normal] on lines */
+.footer__tagline {
+  line-height: 0;
+}
+
+.footer__tagline p {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--clr-text);
+  line-height: normal;
+}
+
+/* Right col — Figma: flex-col leading-[normal] */
+.footer__meta {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--clr-text);
+  line-height: normal;
+}
+
+/* ============================================================
+   TABLET — 768px to 1023px
+   ============================================================ */
+@media (max-width: 1023px) {
+  .navbar {
+    padding: 24px 40px;
+  }
+
+  .hero {
+    padding: 40px;
+  }
+
+  .footer {
+    padding: 32px 40px;
+    gap: 20px 60px;
+  }
+}
+
+/* ============================================================
+   MOBILE — up to 767px
+   ============================================================ */
+@media (max-width: 767px) {
+  .navbar {
+    padding: 20px 24px;
+  }
+
+  .navbar__nav {
+    display: none;
+  }
+
+  .navbar__burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .hero {
+    padding: 40px 24px;
+  }
+
+  .hero__heading-wrap {
+    font-size: 26px;
+  }
+
+  .hero__heading-line {
+    line-height: 28px;
+  }
+
+  .footer {
+    padding: 32px 24px;
+    gap: 16px;
+  }
+
+  .footer__col {
+    width: 100%;
+  }
+}

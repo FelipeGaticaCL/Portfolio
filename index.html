@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felipe Gatica — Digital Product Designer</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/felipe-gatica.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <!-- sticky wrapper so the mobile menu sticks together with the nav -->
+  <div class="site-header">
+
+    <header class="navbar">
+      <div class="navbar__brand">
+        <img src="assets/img/felipe-gatica.png" alt="Felipe Gatica" class="navbar__avatar" />
+        <div class="navbar__identity">
+          <span class="navbar__name">Felipe Gatica</span>
+          <span class="navbar__title">Digital Product Designer</span>
+        </div>
+      </div>
+
+      <!-- Desktop / Tablet links -->
+      <nav class="navbar__nav" aria-label="Main navigation">
+        <a class="navbar__link" href="#" target="_blank" rel="noopener">Linkedin</a>
+        <a class="navbar__link" href="https://drive.google.com/file/d/1nmiTTurpoNAp996j2DRGc34bOkUsY0d0/view?usp=share_link" target="_blank" rel="noopener">Summary</a>
+        <a class="navbar__link navbar__link--lang" href="#" id="lang-toggle" data-i18n="langToggle">English</a>
+      </nav>
+
+      <!-- Mobile burger button -->
+      <button class="navbar__burger" id="burger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <img src="assets/burger.svg" alt="" aria-hidden="true" />
+      </button>
+    </header>
+
+    <!-- Mobile dropdown menu -->
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Menú móvil" aria-hidden="true">
+      <a class="mobile-menu__link" href="#" target="_blank" rel="noopener">Linkedin</a>
+      <a class="mobile-menu__link" href="https://drive.google.com/file/d/1nmiTTurpoNAp996j2DRGc34bOkUsY0d0/view?usp=share_link" target="_blank" rel="noopener">Summary</a>
+      <a class="mobile-menu__link mobile-menu__link--lang" href="#" id="lang-toggle-mobile" data-i18n="langToggle">English</a>
+    </nav>
+
+  </div><!-- /site-header -->
+
+  <!-- ===================== HERO ===================== -->
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+        <!-- label + heading grouped with gap-8px (from Figma) -->
+        <div class="hero__text">
+          <p class="hero__label" data-i18n="heroLabel">PROYECTO PRINCIPAL</p>
+          <div class="hero__heading-wrap">
+            <p class="hero__heading-line" data-i18n="heroLine1">Canal de denuncias,</p>
+            <p class="hero__heading-line" data-i18n="heroLine2">Ley 21,643</p>
+          </div>
+        </div>
+        <a href="#" class="hero__btn" data-i18n="heroBtn">VER PROYECTO</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <!-- Left col — Figma: flex-col w-230, no inner gap, leading-normal -->
+    <div class="footer__col">
+      <p class="footer__name">Felipe Gatica</p>
+      <div class="footer__tagline">
+        <p>Designing incredible and memorable</p>
+        <p>experiences for people.</p>
+      </div>
+    </div>
+    <!-- Right col — Figma: flex-col leading-normal -->
+    <div class="footer__col">
+      <p class="footer__meta">Connecticut, US</p>
+      <p class="footer__meta">© 2026 All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    // ── Language toggle ──────────────────────────────────
+    const translations = {
+      es: {
+        heroLabel:  'PROYECTO PRINCIPAL',
+        heroLine1:  'Canal de denuncias,',
+        heroLine2:  'Ley 21,643',
+        heroBtn:    'VER PROYECTO',
+        langToggle: 'English'
+      },
+      en: {
+         heroLabel:  'MAIN PROJECT',
+        heroLine1:  'Whistleblower Channel,',
+        heroLine2:  'Law 21,643',
+        heroBtn:    'SEE PROJECT',
+        langToggle: 'Español'
+      }
+    };
+
+    let currentLang = 'es';
+
+    function applyLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (translations[lang][key] !== undefined) {
+          el.textContent = translations[lang][key];
+        }
+      });
+    }
+
+    function handleLangToggle(e) {
+      e.preventDefault();
+      applyLang(currentLang === 'es' ? 'en' : 'es');
+    }
+
+    document.getElementById('lang-toggle').addEventListener('click', handleLangToggle);
+    document.getElementById('lang-toggle-mobile').addEventListener('click', handleLangToggle);
+
+    // ── Mobile burger menu ────────────────────────────────
+    var burgerBtn  = document.getElementById('burger-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
+    var menuOpen   = false;
+
+    function toggleMenu(state) {
+      menuOpen = (state !== undefined) ? state : !menuOpen;
+      burgerBtn.setAttribute('aria-expanded', menuOpen);
+      mobileMenu.setAttribute('aria-hidden', !menuOpen);
+      mobileMenu.classList.toggle('is-open', menuOpen);
+    }
+
+    burgerBtn.addEventListener('click', function() { toggleMenu(); });
+
+    // Close menu when a non-lang link is tapped
+    mobileMenu.querySelectorAll('.mobile-menu__link:not(.mobile-menu__link--lang)')
+      .forEach(function(link) {
+        link.addEventListener('click', function() { toggleMenu(false); });
+      });
+  </script>
+
+</body>
+</html>
