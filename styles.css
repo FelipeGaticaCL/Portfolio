@@ -122,11 +122,6 @@ img {
   color: var(--clr-text-nav);
   line-height: normal;
   white-space: nowrap;
-  transition: opacity 0.2s ease;
-}
-
-.navbar__link:hover {
-  opacity: 0.5;
 }
 
 /* Burger — hidden on desktop/tablet */
@@ -167,15 +162,6 @@ img {
   font-size: 14px;
   font-weight: 400;
   color: var(--clr-text-nav);
-  transition: opacity 0.2s ease;
-}
-
-.mobile-menu__link:last-child {
-  border-bottom: none;
-}
-
-.mobile-menu__link:hover {
-  opacity: 0.5;
 }
 
 /* ============================================================
@@ -257,11 +243,6 @@ main {
   font-weight: 500;
   line-height: normal;
   white-space: nowrap;
-  transition: opacity 0.2s ease;
-}
-
-.hero__btn:hover {
-  opacity: 0.75;
 }
 
 /* ============================================================
